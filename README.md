@@ -1,5 +1,10 @@
 # VoodooBlocks - Block layout plugin for WinterCMS
 
+> [!IMPORTANT]
+> VoodooBlocks has been superseded by
+> [VoodooGrid](https://github.com/Xitara-SoftWerX/wn-voodoogrid-plugin).
+> This repository is archived and receives no further development.
+
 Adds a blocklist to fill whole pages with content blocks
 
 ## Components
