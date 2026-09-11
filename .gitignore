@@ -203,3 +203,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/osx,node,macos,windows,composer
+
+### Private project memory ###
+/docs/
+/AGENTS.md

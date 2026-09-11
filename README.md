@@ -5,6 +5,11 @@
 > [VoodooGrid](https://github.com/Xitara-SoftWerX/wn-voodoogrid-plugin).
 > This repository is archived and receives no further development.
 
+## Requirements
+
+- PHP 8.2 or newer
+- Winter CMS 1.2 or newer
+
 Adds a blocklist to fill whole pages with content blocks
 
 ## Components

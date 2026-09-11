@@ -14,7 +14,7 @@ class Blocklist extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'Blocklist Component',
+            'name' => 'Blocklist Component',
             'description' => 'No description provided yet...',
         ];
     }
@@ -23,10 +23,10 @@ class Blocklist extends ComponentBase
     {
         return [
             'blocklist' => [
-                'title'       => 'xitara.voodooblocks::component.blocklist.title',
+                'title' => 'xitara.voodooblocks::component.blocklist.title',
                 'description' => 'xitara.voodooblocks::component.blocklist.description',
-                'type'        => 'dropdown',
-                'required'    => true,
+                'type' => 'dropdown',
+                'required' => true,
             ],
         ];
     }
@@ -50,7 +50,7 @@ class Blocklist extends ComponentBase
         }
 
         // $blocklist->blocks = $this->generateBlocklist($blocklist->blocks);
-        $this->blocklist   = $this->page['blocklist']   = $blocklist;
+        $this->blocklist = $this->page['blocklist'] = $blocklist;
     }
 
     // public function generateBlocklist($blocks)

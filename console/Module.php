@@ -23,6 +23,13 @@ class Module extends Command
      */
     protected $description = 'Generates a plugin, classfile, .yaml, language file(s) and .htm file';
 
+    /**
+     * @var mixed The module path.
+     * @var mixed The plugin path.
+     */
+    protected $modulePath = null;
+    protected $pluginPath = null;
+
     // public function __construct()
     // {
     //     parent::__construct();
@@ -112,6 +119,7 @@ class Module extends Command
 
         if (class_exists($namespace)) {
             $this->output->writeln('Plugin exists: ' . $namespace);
+
             return;
         }
 
@@ -284,6 +292,7 @@ EOF;
 
         if (File::exists($filePath)) {
             $this->output->writeln('Yaml-File exists: ' . $filePath);
+
             return;
         }
 
@@ -332,6 +341,7 @@ EOF;
 
         if (File::exists($filePath)) {
             $this->output->writeln('Template-File exists: ' . $filePath);
+
             return;
         }
 
@@ -367,6 +377,7 @@ EOF;
 
         if (File::exists($filePath)) {
             $this->output->writeln('Language-File exists: ' . $filePath);
+
             return;
         }
 

@@ -4,13 +4,12 @@ namespace Xitara\VoodooBlocks;
 
 use App;
 use Backend;
-use BackendMenu;
 use Event;
+use File;
 use System\Classes\PluginBase;
 use System\Classes\PluginManager;
 use Xitara\VoodooBlocks\Models\Blocklist;
 use Yaml;
-use File;
 
 /**
  * DynamicContent Plugin Information File
@@ -22,15 +21,15 @@ class Plugin extends PluginBase
      *
      * @return array
      */
-    public function pluginDetails(): array
+    public function pluginDetails() : array
     {
         return [
-            'name'        => 'xitara.voodooblocks::lang.plugin.name',
+            'name' => 'xitara.voodooblocks::lang.plugin.name',
             'description' => 'xitara.voodooblocks::lang.plugin.description',
-            'author'      => 'xitara.voodooblocks::lang.plugin.author',
-            'icon'        => 'xitara.voodooblocks::lang.plugin.icon',
-            'iconSvg'     => 'xitara.voodooblocks::lang.plugin.iconSvg',
-            'homepage'    => 'xitara.voodooblocks::lang.plugin.homepage',
+            'author' => 'xitara.voodooblocks::lang.plugin.author',
+            'icon' => 'xitara.voodooblocks::lang.plugin.icon',
+            'iconSvg' => 'xitara.voodooblocks::lang.plugin.iconSvg',
+            'homepage' => 'xitara.voodooblocks::lang.plugin.homepage',
         ];
     }
 
@@ -39,7 +38,7 @@ class Plugin extends PluginBase
      *
      * @return array
      */
-    public function boot(): void
+    public function boot() : void
     {
         /**
          * Check if we are currently in backend module.
@@ -48,23 +47,10 @@ class Plugin extends PluginBase
             return;
         }
 
-        /**
-         * get sidemenu if core-plugin is loaded
-         */
-        if (PluginManager::instance()->exists('Xitara.Nexus') === true) {
-            Event::listen('backend.page.beforeDisplay', function ($controller) {
-                $namespace = (new \ReflectionObject($controller))->getNamespaceName();
-
-                if ($namespace == 'Xitara\VoodooBlocks\Controllers') {
-                    \Xitara\Nexus\Plugin::getSideMenu('Xitara.VoodooBlocks', 'voodooblocks');
-                }
-            });
-        }
-
         Event::listen('backend.page.beforeDisplay', function ($controller) {
             $path = plugins_path('/xitara/voodooblocks/assets');
-            $controller->addCss($path . '/css/backend.css');
-            $controller->addJs($path . '/js/backend.js');
+            // $controller->addCss($path . '/css/backend.css');
+            // $controller->addJs($path . '/js/backend.js');
         });
 
         Event::listen('backend.form.extendFieldsBefore', function ($widget) {
@@ -87,11 +73,11 @@ class Plugin extends PluginBase
 
                 if ($widget->isNested === false && !empty($groups)) {
                     $widget->tabs['fields']['modules'] = [
-                        'tab'    => 'xitara.voodooblocks::lang.tab.modules',
+                        'tab' => 'xitara.voodooblocks::lang.tab.modules',
                         'prompt' => 'xitara.voodooblocks::lang.modules.prompt',
-                        'type'   => 'repeater',
-                        'span'   => 'full',
-                        'style'  => 'accordion',
+                        'type' => 'repeater',
+                        'span' => 'full',
+                        'style' => 'accordion',
                         'groups' => $groups,
                     ];
                 }
@@ -104,16 +90,8 @@ class Plugin extends PluginBase
      *
      * @return void
      */
-    public function register(): void
+    public function register() : void
     {
-        if (PluginManager::instance()->exists('Xitara.Nexus') === true) {
-            BackendMenu::registerContextSidenavPartial(
-                'Xitara.VoodooBlocks',
-                'voodooblocks',
-                '$/xitara/nexus/partials/_sidebar.htm'
-            );
-        }
-
         $this->registerConsoleCommand('voodooblocks.module', 'Xitara\VoodooBlocks\Console\Module');
     }
 
@@ -122,14 +100,14 @@ class Plugin extends PluginBase
      *
      * @return array
      */
-    public function registerComponents(): array
+    public function registerComponents() : array
     {
         return [
-            'Xitara\VoodooBlocks\Components\Blocklist'  => 'blocklist',
+            'Xitara\VoodooBlocks\Components\Blocklist' => 'blocklist',
         ];
     }
 
-    public function registerPageSnippets(): array
+    public function registerPageSnippets() : array
     {
         return $this->registerComponents();
     }
@@ -139,26 +117,26 @@ class Plugin extends PluginBase
      *
      * @return array
      */
-    public function registerPermissions(): array
+    public function registerPermissions() : array
     {
         return [
-            'xitara.voodooblocks.create'            => [
-                'tab'   => 'Voodoo Blocks',
+            'xitara.voodooblocks.create' => [
+                'tab' => 'Voodoo Blocks',
                 'label' => 'Create Blockslists',
             ],
-            'xitara.voodooblocks.edit'              => [
-                'tab'   => 'Voodoo Blocks',
+            'xitara.voodooblocks.edit' => [
+                'tab' => 'Voodoo Blocks',
                 'label' => 'Edit Blockslists',
             ],
         ];
     }
 
-    public function registerMarkupTags(): array
+    public function registerMarkupTags() : array
     {
         return [
             'filters' => [
                 'renderModules' => [$this, 'renderModules'],
-            ]
+            ],
         ];
     }
 
@@ -167,48 +145,37 @@ class Plugin extends PluginBase
      *
      * @return array
      */
-    public function registerNavigation(): array
+    public function registerNavigation() : array
     {
-        $label = 'xitara.voodooblocks::lang.plugin.name';
-
-        if (PluginManager::instance()->exists('Xitara.Nexus') === true) {
-            $label .= '::hidden';
-        }
-
         return [
             'voodooblocks' => [
-                'label'       => $label,
-                'url'         => Backend::url('xitara/voodooblocks/texts'),
-                'icon'        => 'icon-leaf',
-                'iconSvg'     => '/plugins/xitara/voodooblocks/assets/images/voodooblocks-icon.svg',
-                'permissions' => ['xitara.voodooblocks.*'],
-                'order'       => 500,
-            ],
-        ];
-    }
-
-    public static function injectSideMenu(): array
-    {
-        $i = 0;
-        return [
-            'voodooblocks.blocklists'  => [
-                'label' => 'xitara.voodooblocks::lang.submenu.blocklist',
+                'label' => 'xitara.voodooblocks::lang.plugin.name',
                 'url' => Backend::url('xitara/voodooblocks/blocklists'),
-                'icon' => 'icon-archive',
-                'permissions' => [
-                    'xitara.voodooblocks.create',
-                    'xitara.voodooblocks.edit',
+                'icon' => 'icon-leaf',
+                'iconSvg' => '/plugins/xitara/voodooblocks/assets/images/voodooblocks-icon.svg',
+                'permissions' => ['xitara.voodooblocks.*'],
+                'order' => 500,
+                'sideMenu' => [
+                    'blocklists' => [
+                        'label' => 'xitara.voodooblocks::lang.submenu.blocklist',
+                        'url' => Backend::url('xitara/voodooblocks/blocklists'),
+                        'icon' => 'icon-archive',
+                        'permissions' => [
+                            'xitara.voodooblocks.create',
+                            'xitara.voodooblocks.edit',
+                        ],
+                        'attributes' => [
+                            'group' => 'xitara.voodooblocks::lang.submenu.label',
+                            'placeholder' => true,
+                        ],
+                        'order' => 0,
+                    ],
                 ],
-                'attributes' => [
-                    'group' => 'xitara.voodooblocks::lang.submenu.label',
-                    'placeholder' => true,
-                ],
-                'order' => \Xitara\Nexus\Plugin::getMenuOrder('xitara.voodooblocks') + $i++,
             ],
         ];
     }
 
-    public static function getBlocklistOptions(): array
+    public static function getBlocklistOptions() : array
     {
         $data = Blocklist::orderBy('name', 'asc')->lists('name', 'slug');
         $data = ['none' => e(trans('xitara.voodooblocks::lang.no_blocklist'))]
@@ -217,7 +184,7 @@ class Plugin extends PluginBase
         return $data;
     }
 
-    public function renderModules($modules): string
+    public function renderModules($modules) : string
     {
         $result = [];
         foreach ($modules as $module) {

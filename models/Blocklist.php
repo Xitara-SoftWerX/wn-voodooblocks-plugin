@@ -6,6 +6,34 @@ use Model;
 
 /**
  * Blocklist Model
+ *
+ * @property int                                            $id
+ * @property string|null                                    $heading
+ * @property string|null                                    $subheading
+ * @property int|null                                       $is_heading
+ * @property int|null                                       $is_active
+ * @property int|null                                       $is_default_css
+ * @property int|null                                       $is_raw
+ * @property \Illuminate\Support\Carbon|null                $created_at
+ * @property \Illuminate\Support\Carbon|null                $updated_at
+ * @method static \Winter\Storm\Database\Collection<int, static> all($columns = ['*'])
+ * @method static \Winter\Storm\Database\Collection<int, static> get($columns = ['*'])
+ * @method static \Winter\Storm\Database\Builder|Blocklist       lists(string $column, string $key = null)
+ * @method static \Winter\Storm\Database\Builder|Blocklist       newModelQuery()
+ * @method static \Winter\Storm\Database\Builder|Blocklist       newQuery()
+ * @method static \Winter\Storm\Database\Builder|Blocklist       orSearchWhere(string $term, string $columns = [], string $mode = 'all')
+ * @method static \Winter\Storm\Database\Builder|Blocklist       query()
+ * @method static \Winter\Storm\Database\Builder|Blocklist       searchWhere(string $term, string $columns = [], string $mode = 'all')
+ * @method static \Winter\Storm\Database\Builder|Blocklist       whereCreatedAt($value)
+ * @method static \Winter\Storm\Database\Builder|Blocklist       whereHeading($value)
+ * @method static \Winter\Storm\Database\Builder|Blocklist       whereId($value)
+ * @method static \Winter\Storm\Database\Builder|Blocklist       whereIsActive($value)
+ * @method static \Winter\Storm\Database\Builder|Blocklist       whereIsDefaultCss($value)
+ * @method static \Winter\Storm\Database\Builder|Blocklist       whereIsHeading($value)
+ * @method static \Winter\Storm\Database\Builder|Blocklist       whereIsRaw($value)
+ * @method static \Winter\Storm\Database\Builder|Blocklist       whereSubheading($value)
+ * @method static \Winter\Storm\Database\Builder|Blocklist       whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Blocklist extends Model
 {
@@ -62,18 +90,18 @@ class Blocklist extends Model
     /**
      * @var array Relations
      */
-    public $hasOne         = [];
-    public $hasMany        = [
-        'blocks' => Block::class
+    public $hasOne = [];
+    public $hasMany = [
+        'blocks' => Block::class,
     ];
-    public $hasOneThrough  = [];
+    public $hasOneThrough = [];
     public $hasManyThrough = [];
-    public $belongsTo      = [];
-    public $belongsToMany  = [];
-    public $morphTo    = [];
-    public $morphOne   = [];
-    public $morphMany  = [];
-    public $attachOne  = [];
+    public $belongsTo = [];
+    public $belongsToMany = [];
+    public $morphTo = [];
+    public $morphOne = [];
+    public $morphMany = [];
+    public $attachOne = [];
     public $attachMany = [];
 
     // public function beforeSave()

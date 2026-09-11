@@ -2,9 +2,8 @@
 
 namespace Xitara\VoodooBlocks\Controllers;
 
-use BackendMenu;
 use Backend\Classes\Controller;
-use Event;
+use BackendMenu;
 
 /**
  * Blocks Backend Controller

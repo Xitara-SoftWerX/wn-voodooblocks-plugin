@@ -6,6 +6,70 @@ use Model;
 
 /**
  * Block Model
+ *
+ * @property int                                            $id
+ * @property string                                         $heading
+ * @property string                                         $subheading
+ * @property int|null                                       $blocklist_id
+ * @property string                                         $width
+ * @property string                                         $height
+ * @property int                                            $is_active
+ * @property int                                            $is_raw
+ * @property int                                            $is_heading
+ * @property int                                            $is_box
+ * @property int                                            $is_scrollbar
+ * @property string                                         $excerpt
+ * @property string|null                                    $content
+ * @property string|null                                    $buttons_above
+ * @property string|null                                    $buttons
+ * @property int                                            $is_time_control
+ * @property string|null                                    $start_at
+ * @property string|null                                    $end_at
+ * @property string|null                                    $images
+ * @property int                                            $is_image_text
+ * @property int                                            $is_slider
+ * @property int                                            $is_lightbox
+ * @property string|null                                    $slider
+ * @property string|null                                    $lightbox
+ * @property string|null                                    $modules
+ * @property \Illuminate\Support\Carbon|null                $created_at
+ * @property \Illuminate\Support\Carbon|null                $updated_at
+ * @method static \Winter\Storm\Database\Collection<int, static> all($columns = ['*'])
+ * @method static \Winter\Storm\Database\Collection<int, static> get($columns = ['*'])
+ * @method static \Winter\Storm\Database\Builder|Block           lists(string $column, string $key = null)
+ * @method static \Winter\Storm\Database\Builder|Block           newModelQuery()
+ * @method static \Winter\Storm\Database\Builder|Block           newQuery()
+ * @method static \Winter\Storm\Database\Builder|Block           orSearchWhere(string $term, string $columns = [], string $mode = 'all')
+ * @method static \Winter\Storm\Database\Builder|Block           query()
+ * @method static \Winter\Storm\Database\Builder|Block           searchWhere(string $term, string $columns = [], string $mode = 'all')
+ * @method static \Winter\Storm\Database\Builder|Block           whereBlocklistId($value)
+ * @method static \Winter\Storm\Database\Builder|Block           whereButtons($value)
+ * @method static \Winter\Storm\Database\Builder|Block           whereButtonsAbove($value)
+ * @method static \Winter\Storm\Database\Builder|Block           whereContent($value)
+ * @method static \Winter\Storm\Database\Builder|Block           whereCreatedAt($value)
+ * @method static \Winter\Storm\Database\Builder|Block           whereEndAt($value)
+ * @method static \Winter\Storm\Database\Builder|Block           whereExcerpt($value)
+ * @method static \Winter\Storm\Database\Builder|Block           whereHeading($value)
+ * @method static \Winter\Storm\Database\Builder|Block           whereHeight($value)
+ * @method static \Winter\Storm\Database\Builder|Block           whereId($value)
+ * @method static \Winter\Storm\Database\Builder|Block           whereImages($value)
+ * @method static \Winter\Storm\Database\Builder|Block           whereIsActive($value)
+ * @method static \Winter\Storm\Database\Builder|Block           whereIsBox($value)
+ * @method static \Winter\Storm\Database\Builder|Block           whereIsHeading($value)
+ * @method static \Winter\Storm\Database\Builder|Block           whereIsImageText($value)
+ * @method static \Winter\Storm\Database\Builder|Block           whereIsLightbox($value)
+ * @method static \Winter\Storm\Database\Builder|Block           whereIsRaw($value)
+ * @method static \Winter\Storm\Database\Builder|Block           whereIsScrollbar($value)
+ * @method static \Winter\Storm\Database\Builder|Block           whereIsSlider($value)
+ * @method static \Winter\Storm\Database\Builder|Block           whereIsTimeControl($value)
+ * @method static \Winter\Storm\Database\Builder|Block           whereLightbox($value)
+ * @method static \Winter\Storm\Database\Builder|Block           whereModules($value)
+ * @method static \Winter\Storm\Database\Builder|Block           whereSlider($value)
+ * @method static \Winter\Storm\Database\Builder|Block           whereStartAt($value)
+ * @method static \Winter\Storm\Database\Builder|Block           whereSubheading($value)
+ * @method static \Winter\Storm\Database\Builder|Block           whereUpdatedAt($value)
+ * @method static \Winter\Storm\Database\Builder|Block           whereWidth($value)
+ * @mixin \Eloquent
  */
 class Block extends Model
 {
